@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     
     include 'classes/Dbh.class.php';
     include 'classes/signupmodel.class.php';
-    include 'classes/forgotPasswordcontr.class.php';
+    include 'classes/forgetPasswordcontr.class.php';
     include 'classes/signupview.class.php';
 
     $forgotPasswordcontr = new forgotPasswordcontr($email, $newPassword, $confirmPassword, $tokens);
