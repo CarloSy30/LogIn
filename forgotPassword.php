@@ -14,12 +14,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     include 'classes/signupview.class.php';
 
     $forgotPasswordcontr = new forgotPasswordcontr($email);
-    $requested = $forgotPasswordcontr->passwordResetLink();
+    // $requested = $forgotPasswordcontr->passwordResetLink();
 
-    $signupview = new signupview();
-    $result = $signupview->showAlert($requested);
+    // $signupview = new signupview();
+    // $result = $signupview->showAlert($requested);
 
-
+    echo $forgotPasswordcontr->verifyAccount();
 
 }
 
