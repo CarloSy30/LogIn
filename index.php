@@ -78,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             ?>
                                 <div class="header-text mb-4" id="right-header">
                                     <h2>Hello,Again</h2>
-                                    <p>Our team are happy to have you back.</p>
+                                    <p>Our team are grateful to have you back.</p>
                                 </div>
                                 <div class="input-group mb-3">
                                     <input type="text" name="email" value = "<?php echo $data = isset($_POST['email']) ? htmlentities($_POST['email']) : null ?>" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
