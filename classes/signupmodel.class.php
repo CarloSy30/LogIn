@@ -126,6 +126,11 @@ class signupmodel extends Dbh{
         $stmt = null;
     }
 
+
+    // QUERY FOR VERIFYING ACCOUNT
+    public function verifyAccount(){
+        
+    }
     //LOGIC HERE (LOG IN AND SIGN UP)
     protected function checkEmptyFields($password, $passwordRepeat, $name, $phoneNumber, $email){
         
