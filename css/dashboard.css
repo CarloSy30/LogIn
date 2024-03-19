@@ -1,0 +1,15 @@
+.link{
+    text-decoration: none;
+    color: black;
+}
+@media only screen and (max-width: 912px){
+    #test{
+         font-size: 11px;
+    }
+ }
+@media only screen and (max-width: 768px){
+   #test{
+        font-size: 12px;
+   }
+}
+

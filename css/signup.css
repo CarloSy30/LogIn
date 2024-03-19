@@ -1,0 +1,74 @@
+#border{
+    padding: 3%;
+    box-shadow: 5px 10px 18px #888888;
+    border: 1px;
+    text-align: center;
+    border-radius: 25px;
+}
+
+#password-indicator{
+    margin-top: -15px;
+    margin-bottom: 8px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#weak{
+    width: 33%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid black;
+    display: none;
+}
+#medium{
+    width: 33%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid black;
+    display: none;
+}
+#strong{
+    width: 33%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid black;
+    display: none;
+}
+
+#password-description{
+    font-size: 15px;
+    display: none;
+}
+
+#passwordrepeat-indicator{
+    margin-top: -20px;
+}
+
+#passwordrepeat-description{
+    font-size: 15px;
+    display: none;
+}
+
+@media only screen and (max-width: 768px){
+    #right-logo{
+        visibility: hidden;
+    }
+    #main-row{
+        overflow: hidden;
+    }
+    #border{
+        padding: 3%;
+        box-shadow:none;
+        border:none;
+        text-align: center;
+        border-radius: 25px;
+    }
+    #main-cont{
+        margin-top: -550px;
+    }
+}
