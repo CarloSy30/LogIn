@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                             ?>
                                 <div class="header-text mb-4" id="right-header">
-                                    <h2>Hello,Carlo</h2>
+                                    <h2>Hello,Carlo Sy</h2>
                                     <p>Our team are grateful to have you back.</p>
                                 </div>
                                 <div class="input-group mb-3">
