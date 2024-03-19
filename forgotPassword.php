@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     // $signupview = new signupview();
     // $result = $signupview->showAlert($requested);
 
-    echo $forgotPasswordcontr->verifyAccount();
+    echo $forgotPasswordcontr->clickVerify();
 
 }
 
