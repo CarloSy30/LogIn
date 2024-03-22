@@ -1,7 +1,7 @@
 <?php
 
 class signupmodel extends Dbh{
-
+    
     protected function insertUsersAccount($email, $password){
         $sql = "INSERT INTO accounts (user_name, password) VALUES (?, ?)";
         $stmt = $this->connect()->prepare($sql);
@@ -127,10 +127,7 @@ class signupmodel extends Dbh{
     }
 
 
-    // QUERY FOR VERIFYING ACCOUNT
-    public function verifyAccount(){
-        
-    }
+
     //LOGIC HERE (LOG IN AND SIGN UP)
     protected function checkEmptyFields($password, $passwordRepeat, $name, $phoneNumber, $email){
         
@@ -187,7 +184,6 @@ class signupmodel extends Dbh{
     }
 
 
-    //LOGIC HERE (FORGOT PASSWORD)
+    //LOGIC HERE (VERIFYING ACCOUNT THRU EMAIL)
   
-
 }

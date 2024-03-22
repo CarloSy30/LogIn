@@ -1,5 +1,10 @@
 <?php
+require 'PHPMailer-master/src/Exception.php';
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/SMTP.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 class signupcontr extends signupmodel{
 
     private $email;
@@ -8,7 +13,7 @@ class signupcontr extends signupmodel{
     private $name;
     private $phoneNumber;
 
-    public function __construct($email, $password, $passwordRepeat = null ,$name = null, $phoneNumber = null){
+    public function __construct($email, $password = null, $passwordRepeat = null ,$name = null, $phoneNumber = null){
         $this->email = filter_var(trim($email, " "), FILTER_VALIDATE_EMAIL) ?: filter_var(trim($email, " "), FILTER_SANITIZE_SPECIAL_CHARS);
         $this->password = filter_var($password, FILTER_SANITIZE_SPECIAL_CHARS);
         $this->passwordRepeat = filter_var($passwordRepeat, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -78,5 +83,40 @@ class signupcontr extends signupmodel{
 
         return $result;
 
+    }
+
+    //Not yet edited
+    private function verifyAccount($email){
+        include_once 'oneTimePassword.php';
+        $mail = new PHPMailer(true);
+        try{
+            // $mail->SMTPDebug = 3;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth= true;
+            $mail->Username = 'pakopyapre@gmail.com';
+            $mail->Password = $emailPassword;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+            $mail->From = $email;
+            $mail->FromName = $email;
+            $mail->addAddress($email);
+            $mail->isHTML(true);
+            $mail->Subject = "Reset Password Notification";
+
+            $templateBody = "
+                    <h2> Hello </h2>
+                    <br/><br/>
+                    <a href='http://localhost/login/passwordReset.php'> click me </a>
+            ";
+
+            $mail->Body = $templateBody;
+    
+            $mail->send();
+            return true;
+        }catch(Exception $e){
+            echo $mail->ErrorInfo;
+            return false;
+        }
     }
 }
