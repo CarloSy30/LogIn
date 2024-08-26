@@ -2,11 +2,12 @@
 
 class signupmodel extends Dbh{
     
-    protected function insertUsersAccount($email, $password){
-        $sql = "INSERT INTO accounts (user_name, password) VALUES (?, ?)";
+    protected function insertUsersAccount($email, $password, $status = "Unverified"){
+        $sql = "INSERT INTO accounts (user_name, password, verification_status) VALUES (?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
         $stmt->bindParam(1, $email, PDO::PARAM_STR);
         $stmt->bindParam(2, $password, PDO::PARAM_STR);
+        $stmt->bindParam(3, $status, PDO::PARAM_STR);
 
         $stmt->execute();
         $stmt = null;

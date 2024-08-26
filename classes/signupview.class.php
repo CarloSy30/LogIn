@@ -109,6 +109,4 @@ class signupview extends signupmodel{
        
     }
 
-   
-
 }
