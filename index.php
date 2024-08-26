@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <img src="images/logo.png" class="rounded-circle mt-4" style="width: 300px;">
                 </div>
                 <p class="text-white fs-2 pt-3 mb-1 logo" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">FLAT OS</p>
-                <p class="text-white mb-3"><small>APARTMENT FOR RENTs</small></p>
+                <p class="text-white mb-3"><small>CBB's Apartment</small></p>
 
             </div> 
 
