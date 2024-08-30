@@ -99,6 +99,11 @@ class signupview extends signupmodel{
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         <strong>Empty!</strong> Please complete the fields.  </div>';
                 break;
+            case 'not_activated':
+                return '<div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>Please activate your account</div>';
+                break;
             default:
             return '<div class="alert alert-danger alert-dismissible fade show">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>

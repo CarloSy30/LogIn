@@ -6,7 +6,7 @@ if(isset($_SESSION['passwordTokens'])){
     exit();
 }
 if(isset($_SESSION['account_id'])){
-    header("Location: LANDLORD/dashboard.php");
+    header("Location: CUSTOMER/dashboard.php");
     exit();
 }
 
@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $logged = $signupcontr->loginProcess();
     
     if($logged == 'correct' && isset($_SESSION['account_id'])){
-        header("Location: LANDLORD/dashboard.php");
+        header("Location: CUSTOMER/dashboard.php");
         exit();
 
     }
@@ -63,8 +63,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="featured-image mb-3 logo">
                     <img src="images/logo.png" class="rounded-circle mt-4" style="width: 300px;">
                 </div>
-                <p class="text-white fs-2 pt-3 mb-1 logo" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Example</p>
-                <p class="text-white mb-3"><small>Home Sweet Apartments</small></p>
+                <p class="text-white fs-2 pt-3 mb-1 logo" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">FLAT OS</p>
+                <p class="text-white mb-3"><small>CBB's Apartment</small></p>
+
             </div> 
 
             <!-------------------- ------ Right Box ---------------------------->
@@ -74,8 +75,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <?php
                                 $displayaAlert = isset($result)? $result : '';
                                 echo $displayaAlert;
+                                
+                                if(isset($_GET['status'])){
+                                    echo '<div class="alert alert-success alert-dismissible fade show">
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                            <strong>Account activated!</div>';                                
+                                }
 
                             ?>
+                            
                                 <div class="header-text mb-4" id="right-header">
                                     <h2>Hello, Again</h2>
                                     <p>Our team are grateful to have you back.</p>
