@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                   $displayAlert = isset($result)? $result : '';
                   echo $displayAlert;
                 ?>
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-1">Create Account</p>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-1">Create Customer Account</p>
                
                 <form action="#" method="post" class="mx-1 mx-md-4" id="signup-form">
 
