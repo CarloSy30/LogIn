@@ -22,6 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fbtn'])){
     if($result == "account_activated"){
         session_unset();
         session_destroy();
+        unset($_POST['otp1'],$_POST['otp2'],$_POST['otp3'],$_POST['otp4']);
         //ANG STATUS DITO AY GAGAMITIN PARA MAG DISPLAY NG ALERT BOX SA index.php
         header("Location: index.php?status=$result");
     }
