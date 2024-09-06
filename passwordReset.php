@@ -26,6 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     if($reset == "password_updated" || $reset == "expired_tokens"){
         session_unset();
         session_destroy();
+        unset($_POST['newPassword'], $_POST['confirmPassword']);
     }
     
 }

@@ -21,6 +21,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   $signupcontr = new signupcontr($email, $password, $repeatPassword, $name, $phoneNumber);
   $inserted = $signupcontr->insertInfos();
 
+  unset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['repeatPassword'], $_POST['phoneNumber']);
+
   $signupview = new signupview();
   $result = $signupview->showAlert($inserted);
 

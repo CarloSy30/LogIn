@@ -19,6 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $signupview = new signupview();
     $result = $signupview->showAlert($requested);
 
+    unset($_POST['email']);
 
 
 }

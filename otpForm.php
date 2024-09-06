@@ -5,12 +5,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $num2 = $_POST['otp2'];
     $num3 = $_POST['otp3'];
     $num4 = $_POST['otp4'];
-    // echo var_dump($num1);
-    $OTP = $num1.$num2.$num3.$num4;
-    if($OTP == 4321){
-        echo "correct";
-    }else{
-        echo "incorrect";
+
+    $fourDigitsOTP = $num1.$num2.$num3.$num4;
+
+    //YUNG SESSION DITO AY GALING SA signup.php | insertInfos() and sendOTP() 
+    $signupcontr = new signupcontr($_SESSION['email']);
+    // $result = $signupcontr->activateAccount($_SESSION['otp'], $fourDigitsOTP);
+    
+    if($result == "account_activated"){
+        session_unset();
+        session_destroy();
+        unset($_POST['otp1'],$_POST['otp2'],$_POST['otp3'],$_POST['otp4']);
+        //ANG STATUS DITO AY GAGAMITIN PARA MAG DISPLAY NG ALERT BOX SA index.php
+        header("Location: index.php?status=$result");
+
     }
 }
 ?>  
