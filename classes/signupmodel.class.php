@@ -82,6 +82,12 @@ class signupmodel extends Dbh{
             exit();
         }
 
+        if($data['verification_status'] !== "active"){
+            $stmt = null;
+            return 'not_activated';
+            exit();
+        }
+
         $stmt = null;
         // session_start();
         /*Hindi na kailangan mag lagay ng session_start() dito dahil may session_start() na sa require_once 'config.php' 
@@ -185,6 +191,23 @@ class signupmodel extends Dbh{
     }
 
 
-    //LOGIC HERE (VERIFYING ACCOUNT THRU EMAIL)
-  
+    //QUERY VERIFYING ACCOUNT OF USER
+    protected function updateAccountStatus($email, $status = "active"){
+        $sql = "UPDATE accounts SET verification_status = ? WHERE user_name = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(1, $status, PDO::PARAM_STR);
+        $stmt->bindParam(2, $email, PDO::PARAM_STR);
+
+        $stmt->execute();
+        $stmt = null;
+        return true;
+    }
+
+    protected function checkOTP($emailOTP, $insertOTP){
+        if($emailOTP !== $insertOTP){
+            return false;
+        }
+        return true;
+        
+    }
 }

@@ -13,7 +13,7 @@ class signupcontr extends signupmodel{
     private $name;
     private $phoneNumber;
 
-    public function __construct($email, $password = null, $passwordRepeat = null ,$name = null, $phoneNumber = null){
+    public function __construct($email = null, $password = null, $passwordRepeat = null ,$name = null, $phoneNumber = null){
         $this->email = filter_var(trim($email, " "), FILTER_VALIDATE_EMAIL) ?: filter_var(trim($email, " "), FILTER_SANITIZE_SPECIAL_CHARS);
         $this->password = filter_var($password, FILTER_SANITIZE_SPECIAL_CHARS);
         $this->passwordRepeat = filter_var($passwordRepeat, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -30,6 +30,8 @@ class signupcontr extends signupmodel{
 
         $this->insertUsersAccount($this->email, $hashed);
         $this->insertUsersInfo($this->getLastIndex(), $this->name, $this->phoneNumber);
+        $this->sendOTP();
+        $_SESSION['email'] = $this->email;
         return 'correct';
       }else{
 
@@ -79,45 +81,69 @@ class signupcontr extends signupmodel{
         }else if($result == "wrong_password"){
             return 'wrong_password';
             exit();
+        }else if($result == "not_activated"){
+            return 'not_activated';
+            exit();
         }
 
         return $result;
 
     }
 
-    //Will edit the body
-    // private function verifyAccount($email){
-    //     include_once 'oneTimePassword.php';
-    //     $mail = new PHPMailer(true);
-    //     try{
-    //         // $mail->SMTPDebug = 3;
-    //         $mail->isSMTP();
-    //         $mail->Host = 'smtp.gmail.com';
-    //         $mail->SMTPAuth= true;
-    //         $mail->Username = 'pakopyapre@gmail.com';
-    //         $mail->Password = $emailPassword;
-    //         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    //         $mail->Port = 587;
-    //         $mail->From = $email;
-    //         $mail->FromName = $email;
-    //         $mail->addAddress($email);
-    //         $mail->isHTML(true);
-    //         $mail->Subject = "OTP Notification";
+    //FOR VERIFICATION OF USER ACCOUNT
+    public function sendOTP(){
+        include_once 'oneTimePassword.php';
+        $mail = new PHPMailer(true);
+        try{
+            // $mail->SMTPDebug = 3;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth= true;
+            $mail->Username = 'dancarlosyyyyy30@gmail.com';
+            $mail->Password = $emailPassword;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+            $mail->From = $this->email;
+            $mail->FromName = "FLAT-OS";
+            $mail->addAddress($this->email);
+            $mail->isHTML(true);
+            $mail->Subject = "OTP Notification";
+            //NAKA SESSION ANG OTP CODE DITO, PARA MAPUNTA SIYA SA otpForm.php for comparison of user input
+            $_SESSION['otp'] = $this->otpCode();
+            $templateBody = "
+                    <h2> Hello this is yung OTP number: ". $_SESSION['otp'] ."</h2>";
 
-    //         $templateBody = "
-    //                 <h2> Hello </h2>
-    //                 <br/><br/>
-    //                 <a href='http://localhost/login/passwordReset.php'> click me </a>
-    //         ";
+            $mail->Body = $templateBody;
+    
+            $mail->send();
+            return true;
+        }catch(Exception $e){
+            echo $mail->ErrorInfo;
+            return false;
+        }
+    }
+    
+    // THIS IS VERIFICATION CODE
+    private function otpCode(){
+        $otp = null;
+        for($x = 1; $x <= 4; $x++){
+            $random = rand(0,9);
+            $otp = $otp . $random;  
+        }
+        return $otp;
+    }
 
-    //         $mail->Body = $templateBody;
-    
-    //         $mail->send();
-    //         return true;
-    //     }catch(Exception $e){
-    //         echo $mail->ErrorInfo;
-    //         return false;
-    //     }
-    // }
-    
+    public function activateAccount($emailOTP, $insertOTP){
+       
+        if($this->checkOTP($emailOTP, $insertOTP)){
+            $this->updateAccountStatus($this->email);
+            return 'account_activated';
+            exit();
+        }else{
+            return 'incorrect_OTP';
+            exit();
+        }
+    }
+
+
 }
