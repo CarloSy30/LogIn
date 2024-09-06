@@ -9,7 +9,6 @@ if(isset($_SESSION['account_id'])){
     header("Location: CUSTOMER/dashboard.php");
     exit();
 }
-
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -18,14 +17,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'classes/signupmodel.class.php';
     include 'classes/signupcontr.class.php';
     include 'classes/signupview.class.php';
-
+    
     $signupcontr = new signupcontr($email, $password); 
     $logged = $signupcontr->loginProcess();
-    
+
+    unset($_POST['email'], $_POST['password']);
+   
     if($logged == 'correct' && isset($_SESSION['account_id'])){
         header("Location: CUSTOMER/dashboard.php");
         exit();
-
     }
 
     $signupview = new signupview();
@@ -89,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <p>Our team are grateful to have you back.</p>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="email" value = "<?php echo $data = isset($_POST['email']) ? htmlentities($_POST['email']) : null ?>" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
+                                    <input type="text" name="email" value = "<?php echo $data = isset($email) ? htmlentities($email) : null ?>" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
                                 </div>
                                 <div class="input-group mb-1">
                                     <input type="password" id="password" name="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password">

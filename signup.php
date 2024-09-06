@@ -23,9 +23,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   $signupview = new signupview();
   $result = $signupview->showAlert($inserted);
-
+  $testt = $signupcontr->getLastIndex();
+  
+  unset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['repeatPassword'], $_POST['phoneNumber']);
+  
   if($inserted == "correct"){
+    //TO CLEAR THE TEXTBOX IN THE FORM
     unset($name, $email, $phoneNumber);
+
+    
     header("Location: otpForm.php");
   }
 

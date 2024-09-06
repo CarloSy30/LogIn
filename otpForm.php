@@ -19,9 +19,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fbtn'])){
     $signupcontr = new signupcontr($_SESSION['email']);
     $result = $signupcontr->activateAccount($_SESSION['otp'], $fourDigitsOTP);
     
+    unset($_POST['otp1'],$_POST['otp2'],$_POST['otp3'],$_POST['otp4']);
     if($result == "account_activated"){
         session_unset();
         session_destroy();
+
+       
         //ANG STATUS DITO AY GAGAMITIN PARA MAG DISPLAY NG ALERT BOX SA index.php
         header("Location: index.php?status=$result");
     }

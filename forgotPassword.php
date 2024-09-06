@@ -1,9 +1,5 @@
 <?php
 session_start();
-if(isset($_SESSION['account_id'])){
-    header("Location: test.php");
-    exit();
-}
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $email = $_POST['email'];
@@ -19,8 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $signupview = new signupview();
     $result = $signupview->showAlert($requested);
 
-
-
+    unset($_POST['email']);
 }
 
 ?>

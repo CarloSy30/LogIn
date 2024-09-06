@@ -19,7 +19,7 @@ class signupmodel extends Dbh{
         $stmt->bindParam(1, $accountId, PDO::PARAM_INT);
         $stmt->bindParam(2, $name, PDO::PARAM_STR);
         $stmt->bindParam(3, $phoneNumber, PDO::PARAM_STR);
-
+        
         $stmt->execute();
         $stmt = null;
     }
@@ -41,7 +41,7 @@ class signupmodel extends Dbh{
         return false;
     }
 
-    protected function getLastIndex(){
+    public function getLastIndex(){
         $sql = "SELECT account_id FROM accounts ORDER BY account_id DESC LIMIT 1";
         $stmt = $this->connect()->prepare($sql);
 
