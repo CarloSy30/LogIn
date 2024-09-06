@@ -13,7 +13,7 @@ class forgotPasswordcontr extends signupmodel{
     private $tokens;
 
     public function __construct($email, $newPassword = null, $confirmPassword = null, $tokens = null){
-        $this->email = filter_var(trim($email, " "), FILTER_SANITIZE_SPECIAL_CHARS);
+        $this->email =  filter_var(trim($email, " "), FILTER_VALIDATE_EMAIL) ?: filter_var(trim($email, " "), FILTER_SANITIZE_SPECIAL_CHARS);
         $this->newPassword = filter_var($newPassword, FILTER_SANITIZE_SPECIAL_CHARS);
         $this->confirmPassword = filter_var($confirmPassword, FILTER_SANITIZE_SPECIAL_CHARS);
         $this->tokens = filter_var($tokens, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -24,7 +24,7 @@ class forgotPasswordcontr extends signupmodel{
         if(!$this->isExisting($this->email) && $this->isEmailValid($this->email)){
            
             
-            if($this->updateTokens($this->email, time()) && $this->sendResetPassword()){
+            if($this->updateTokens($this->email, time()) && $this->sendEmail($this->email)){
                 $tokenInfo = $this->getTokens($this->email);
                 // session_start(); may nakalagay na kasing session_start() sa forgotPassword.php sa taas kaya no need na to.
                 $_SESSION['forgotEmail'] = $this->email;
@@ -42,7 +42,7 @@ class forgotPasswordcontr extends signupmodel{
   
     }
 
-    private function sendResetPassword(){
+    private function sendEmail($email){
         include_once 'oneTimePassword.php';
         $mail = new PHPMailer(true);
         try{
@@ -50,13 +50,13 @@ class forgotPasswordcontr extends signupmodel{
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth= true;
-            $mail->Username = 'dancarlosyyyyy30@gmail.com';
+            $mail->Username = 'pakopyapre@gmail.com';
             $mail->Password = $emailPassword;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
-            $mail->From = $this->email;
-            $mail->FromName = "FLAT-OS";
-            $mail->addAddress($this->email);
+            $mail->From = $email;
+            $mail->FromName = $email;
+            $mail->addAddress($email);
             $mail->isHTML(true);
             $mail->Subject = "Reset Password Notification";
           

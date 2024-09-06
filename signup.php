@@ -23,20 +23,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   $signupview = new signupview();
   $result = $signupview->showAlert($inserted);
-  $testt = $signupcontr->getLastIndex();
-  
-  unset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['repeatPassword'], $_POST['phoneNumber']);
-  
-  if($inserted == "correct"){
-    //TO CLEAR THE TEXTBOX IN THE FORM
-    unset($name, $email, $phoneNumber);
 
-    
-    header("Location: otpForm.php");
+  if($inserted == "correct"){
+    unset($name, $email, $phoneNumber);
   }
 
 }
-
 
 ?>
 
@@ -65,14 +57,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                   $displayAlert = isset($result)? $result : '';
                   echo $displayAlert;
                 ?>
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-1">Create Customer Account</p>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-1">Create Account</p>
                
                 <form action="#" method="post" class="mx-1 mx-md-4" id="signup-form">
 
                     <div class="d-flex flex-row align-items-center mb-1">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" name="name" value = "<?php echo $data = isset($name) ? htmlentities($name) : null ?>" id="fullName" class="form-control bg-light input_info" placeholder="Name"/>
+                        <input type="text" name="name" value = "<?php echo $data = isset($name) ? htmlentities($name) : null ?>" id="fullName" class="form-control bg-light" placeholder="Name"/>
                         <label class="form-label" for="fullName"></label>
                       </div>
                     </div>
@@ -80,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="d-flex flex-row align-items-center mb-1">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" name="phoneNumber" value = "<?php echo $data = isset($phoneNumber) ? htmlentities($phoneNumber) : null ?>" id="phoneNumber" class="form-control bg-light input_info" placeholder="Phone number" />
+                        <input type="text" name="phoneNumber" value = "<?php echo $data = isset($phoneNumber) ? htmlentities($phoneNumber) : null ?>" id="phoneNumber" class="form-control bg-light" placeholder="Phone number" />
                         <label class="form-label" for="phoneNumber"></label>
                       </div>
                     </div>
@@ -88,7 +80,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="d-flex flex-row align-items-center mb-1">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" name="email" value = "<?php echo $data = isset($email) ? htmlentities($email) : null ?>" id="email" class="form-control bg-light input_info" placeholder="Email"/>
+                        <input type="text" name="email" value = "<?php echo $data = isset($email) ? htmlentities($email) : null ?>" id="email" class="form-control bg-light" placeholder="Email"/>
                         <label class="form-label" for="email"></label>
                       </div>           
                     </div>
@@ -96,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="d-flex flex-row align-items-center mb-1">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" name="password" id="password" class="form-control bg-light input_info" placeholder="Password" autocomplete="new-password"/>
+                        <input type="password" name="password" id="password" class="form-control bg-light" placeholder="Password" autocomplete="new-password"/>
                         <label class="form-label" for="password"></label>
                         <div id="password-indicator">
                           <span id="weak"></span>
@@ -110,7 +102,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="d-flex flex-row align-items-center mb-1">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-4">
-                        <input type="password" name="repeatPassword" id="repeatPassword" class="form-control bg-light input_info" placeholder="Repeat your password"/>
+                        <input type="password" name="repeatPassword" id="repeatPassword" class="form-control bg-light" placeholder="Repeat your password"/>
                         <label class="form-label" for="repeatPassword"></label>
                         <div id="passwordrepeat-indicator">
                           <small id="passwordrepeat-description"></small>
@@ -120,7 +112,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </div>
 
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <!-- NEW BUTTON -->
                       <button id="register-button" type="submit" class="btn btn-primary btn-lg" style="width: 500px;" disabled>Register</button>
                     </div>
                     <div class="row" id="login">
@@ -131,6 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                 <img src="images/sidelogo.png"
                    alt="Sample image" style="width:600px" id="right-logo">
+
               </div>
             </div>
           </div>
@@ -138,9 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       </div>
     </div>
   </div>
- 
 </section>
-
 <script src="javascript/signup.js"></script>
 </body>
 </html>

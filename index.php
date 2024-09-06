@@ -6,9 +6,10 @@ if(isset($_SESSION['passwordTokens'])){
     exit();
 }
 if(isset($_SESSION['account_id'])){
-    header("Location: CUSTOMER/dashboard.php");
+    header("Location: LANDLORD/dashboard.php");
     exit();
 }
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -17,15 +18,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'classes/signupmodel.class.php';
     include 'classes/signupcontr.class.php';
     include 'classes/signupview.class.php';
-    
+
     $signupcontr = new signupcontr($email, $password); 
     $logged = $signupcontr->loginProcess();
-
-    unset($_POST['email'], $_POST['password']);
-   
+    
     if($logged == 'correct' && isset($_SESSION['account_id'])){
-        header("Location: CUSTOMER/dashboard.php");
+        header("Location: LANDLORD/dashboard.php");
         exit();
+
     }
 
     $signupview = new signupview();
@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="featured-image mb-3 logo">
                     <img src="images/logo.png" class="rounded-circle mt-4" style="width: 300px;">
                 </div>
-                <p class="text-white fs-2 pt-3 mb-1 logo" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">FLAT-OS</p>
+                <p class="text-white fs-2 pt-3 mb-1 logo" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">FLAT OS</p>
                 <p class="text-white mb-3"><small>CBB's Apartment</small></p>
 
             </div> 
@@ -75,21 +75,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <?php
                                 $displayaAlert = isset($result)? $result : '';
                                 echo $displayaAlert;
-                                
-                                if(isset($_GET['status'])){
-                                    echo '<div class="alert alert-success alert-dismissible fade show">
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                            <strong>Account activated!</div>';                                
-                                }
 
                             ?>
-                            
                                 <div class="header-text mb-4" id="right-header">
                                     <h2>Hello, Again</h2>
                                     <p>Our team are grateful to have you back.</p>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="email" value = "<?php echo $data = isset($email) ? htmlentities($email) : null ?>" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
+                                    <input type="text" name="email" value = "<?php echo $data = isset($_POST['email']) ? htmlentities($_POST['email']) : null ?>" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
                                 </div>
                                 <div class="input-group mb-1">
                                     <input type="password" id="password" name="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password">

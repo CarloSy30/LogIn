@@ -22,13 +22,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     $signupview = new signupview();
     $result = $signupview->showAlert($reset);
-    
-    unset($_POST['newPassword'], $_POST['confirmPassword']);
-    //SESSION AND POST VARIABLES ARE DONE TO UNSET
+
     if($reset == "password_updated" || $reset == "expired_tokens"){
         session_unset();
         session_destroy();
-        
     }
     
 }

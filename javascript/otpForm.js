@@ -1,5 +1,5 @@
 const OTPinputs = document.querySelectorAll('input')
-const button = document.querySelector('#fbtn')
+const button = document.querySelector('button')
 
 window.onload = ()=> OTPinputs[0].focus()
 

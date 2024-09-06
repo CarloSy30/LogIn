@@ -13,10 +13,10 @@ body{
 }
 
 .container{
-    width: 600px;
+    width: 300px;
     height: auto;
     padding: 40px 30px;
-    background-color: #d4eda6;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,7 +70,7 @@ form .input_fields{
     outline-offset: 2px;
 }
 
-form #fbtn{
+form button{
     margin-top: 25px;
     width: 92%;
     background: #e9d585;
@@ -85,12 +85,12 @@ form #fbtn{
     transition: all 0.2s ease;
 }
 
-form #fbtn.active{
-    background: #7aa2f0;
+form button.active{
+    background: #ffcc00;
     pointer-events: auto;
     color: #000;
 }
 
-form #fbtn:hover{
+form button:hover{
     background: #e6b801;
 }

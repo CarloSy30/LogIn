@@ -19,7 +19,7 @@ class signupmodel extends Dbh{
         $stmt->bindParam(1, $accountId, PDO::PARAM_INT);
         $stmt->bindParam(2, $name, PDO::PARAM_STR);
         $stmt->bindParam(3, $phoneNumber, PDO::PARAM_STR);
-        
+
         $stmt->execute();
         $stmt = null;
     }
@@ -41,7 +41,7 @@ class signupmodel extends Dbh{
         return false;
     }
 
-    public function getLastIndex(){
+    protected function getLastIndex(){
         $sql = "SELECT account_id FROM accounts ORDER BY account_id DESC LIMIT 1";
         $stmt = $this->connect()->prepare($sql);
 
@@ -79,12 +79,6 @@ class signupmodel extends Dbh{
         if(!$checkPassword){
             $stmt = null;
             return 'wrong_password';
-            exit();
-        }
-
-        if($data['verification_status'] !== "active"){
-            $stmt = null;
-            return 'not_activated';
             exit();
         }
 
@@ -191,23 +185,6 @@ class signupmodel extends Dbh{
     }
 
 
-    //QUERY VERIFYING ACCOUNT OF USER
-    protected function updateAccountStatus($email, $status = "active"){
-        $sql = "UPDATE accounts SET verification_status = ? WHERE user_name = ?";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->bindParam(1, $status, PDO::PARAM_STR);
-        $stmt->bindParam(2, $email, PDO::PARAM_STR);
-
-        $stmt->execute();
-        $stmt = null;
-        return true;
-    }
-
-    protected function checkOTP($emailOTP, $insertOTP){
-        if($emailOTP !== $insertOTP){
-            return false;
-        }
-        return true;
-        
-    }
+    //LOGIC HERE (VERIFYING ACCOUNT THRU EMAIL)
+  
 }
